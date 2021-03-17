@@ -7,6 +7,7 @@ var Task = mongoose.model("Tasks");
 
 //http://localhost:8000/tasks
 exports.t_GetAll = (req, res) => {
+  console.log("Sending All data")
   Task.find({}, (err, todo) => {
     if (err) res.send(err);
     res.json(todo);
@@ -19,11 +20,11 @@ exports.t_GetAll = (req, res) => {
 //    "status" : "pending",
 //}
 exports.t_Post = (req, res) => {
-  console.log(req.body)
+  console.log(req.body.status)
   var newTodo = new Task(req.body);
   newTodo.save((err, todo) => {
     if (err) res.send(err);
-    res.json(todo);
+    res.json({ message: "Task is added successfully", todo });
   });
 };
 
@@ -48,14 +49,16 @@ exports.t_Get = (req, res) => {
 //    "status" : "done",
 //}
 exports.t_Put = (req, res) => {
+  console.log(req.body)
   Task.findOneAndUpdate({ name: req.params.id}, req.body, (err, todo) => {
     if (err) res.send(err);
-    res.json(todo);
+    res.json({ message: "Task is updated successfully", todo });
   });
 };
 
 //http://localhost:8000/tasks/clab_backend
 exports.t_Delete = (req, res) => {
+  console.log(req.params)
   Task.remove({name: req.params.id}, (err, todo) => {
     if (err) res.send(err);
     res.json({message: "Task is deleted successfully", todo});
