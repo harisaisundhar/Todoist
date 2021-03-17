@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 const API_KEY = "http://localhost:8000/tasks"
-class Friends extends React.Component {
+class TODO extends React.Component {
     render() {
         return (
             <table className="table table-striped">
@@ -54,7 +55,6 @@ class App extends Component {
     .catch(console.log)
   }
 
-
   create(e) {
     e.preventDefault();
     console.log(this.todos)
@@ -74,11 +74,9 @@ class App extends Component {
     });
   }
   update(e) {
-    // update entity - PUT
     e.preventDefault();
     const dataToSend = JSON.stringify({ "name": this.state.name, "status": this.state.status })
 
-    // this will update entries with PUT
     fetch(`http://localhost:8000/tasks/${this.state.name}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -91,9 +89,7 @@ class App extends Component {
   }
 
   delete(e) {
-    // delete entity - DELETE
     e.preventDefault();
-    // deletes entities
     fetch(`http://localhost:8000/tasks/${this.state.name}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" }
@@ -121,7 +117,7 @@ class App extends Component {
             <div className="col-md-8">
               <h1 className="display-4 text-center">TODOIST</h1>
               <form className="d-flex flex-column">
-                <legend className="text-center">Add-Update-Delete Todo</legend>
+                <legend className="text-center">Personal Reminder</legend>
                 <label htmlFor="name">
                   Todo Name:
                   <input
@@ -145,24 +141,26 @@ class App extends Component {
                     onChange={(e) => this.handleChange({ status: e.target.value })}
                     required
                     />
-                </label>
-                <button className="btn btn-primary" type='button' onClick={(e) => this.create(e)}>
+                  </label>
+                <Button variant="secondary" type='button' onClick={(e) => this.create(e)}>
                   Add
-                </button>
-                <button className="btn btn-info" type='button' onClick={(e) => this.update(e)}>
+                </Button>
+                <Button variant="info" type='button' onClick={(e) => this.update(e)}>
                     Update
-                </button>
-                <button className="btn btn-danger" type='button' onClick={(e) => this.delete(e)}>
+                </Button>
+                <Button variant="dark" type='button' onClick={(e) => this.delete(e)}>
                     Delete
-                </button>
+                </Button>
               </form>
-              <Friends todo={this.state.todos} />
+                <TODO todo={this.state.todos} />
             </div>
           </div>
         </div>
         
         </div>
-       </div>
+      
+      </div>
+      
     );
   }
 }
