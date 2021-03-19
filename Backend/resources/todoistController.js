@@ -5,7 +5,7 @@ var Task = mongoose.model("Tasks");
 // To stop mongo db
 //brew services stop mongodb-community
 
-//http://localhost:8000/tasks
+//pm2 logs
 exports.t_GetAll = async(req, res) => {
   console.log("Sending All data")
   Task.find({}, (err, todo) => {

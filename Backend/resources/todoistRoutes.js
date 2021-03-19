@@ -4,6 +4,8 @@ module.exports = (app) => {
   //Middleware
   const log = (req, res, next) => {
     console.log('Whaaaaat ?????');
+    console.log(req.body)
+    console.log(req.params)
     next()
   }
 
