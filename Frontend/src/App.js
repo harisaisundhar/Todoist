@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 
-const API_KEY = "http://localhost:8000/tasks"
+const API_KEY = "http://18.232.64.79/tasks"
 class TODO extends React.Component {
     render() {
         return (
