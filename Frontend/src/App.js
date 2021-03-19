@@ -41,7 +41,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
-    fetch('http://localhost:8000/tasks', {
+    fetch(API_KEY, {
       "method": "GET"
     })
     .then(res => res.json())
@@ -60,7 +60,7 @@ class App extends Component {
     console.log(this.todos)
     const dataToSend = JSON.stringify({ "name": this.state.name, "status": this.state.status })
 
-    fetch("http://localhost:8000/tasks", {
+    fetch(API_KEY, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: dataToSend
@@ -77,7 +77,7 @@ class App extends Component {
     e.preventDefault();
     const dataToSend = JSON.stringify({ "name": this.state.name, "status": this.state.status })
 
-    fetch(`http://localhost:8000/tasks/${this.state.name}`, {
+    fetch(`${API_KEY}/${this.state.name}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: dataToSend
@@ -90,7 +90,7 @@ class App extends Component {
 
   delete(e) {
     e.preventDefault();
-    fetch(`http://localhost:8000/tasks/${this.state.name}`, {
+    fetch(`${API_KEY}/${this.state.name}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" }
     })
