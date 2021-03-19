@@ -6,7 +6,7 @@ var Task = mongoose.model("Tasks");
 //brew services stop mongodb-community
 
 //http://localhost:8000/tasks
-exports.t_GetAll = (req, res) => {
+exports.t_GetAll = async(req, res) => {
   console.log("Sending All data")
   Task.find({}, (err, todo) => {
     if (err) res.send(err);
@@ -19,7 +19,7 @@ exports.t_GetAll = (req, res) => {
 //    "name" : "clab_backend",
 //    "status" : "pending",
 //}
-exports.t_Post = (req, res) => {
+exports.t_Post = async(req, res) => {
   console.log(req.body.status)
   var newTodo = new Task(req.body);
   newTodo.save((err, todo) => {
